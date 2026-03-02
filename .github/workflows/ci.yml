@@ -47,7 +47,7 @@ jobs:
         env:
           GITOPS_TOKEN: ${{ secrets.GITOPS_TOKEN }}
         run: |
-          SHA="sha-${GITHUB_SHA:0:7}"
+          export SHA="sha-${GITHUB_SHA:0:7}"
           git clone https://x-token:${GITOPS_TOKEN}@github.com/kerbatek/gitops.git /tmp/gitops
           cd /tmp/gitops
           git config user.name "github-actions[bot]"
