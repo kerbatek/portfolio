@@ -1,6 +1,6 @@
-# portfolio
+# Portfolio
 
-Personal site — static HTML served via Nginx, containerized and deployed through GitOps.
+Personal site - static HTML served via Nginx, containerized and deployed through GitOps.
 
 **[mrembiasz.pl](https://mrembiasz.pl)**
 
