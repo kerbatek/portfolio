@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Mateusz Rembiasz</title>
+    <meta name="description" content="Developer based in Krakow, transitioning into DevOps and cloud engineering.">
+    <meta property="og:title" content="About - Mateusz Rembiasz">
+    <meta property="og:description" content="Developer based in Krakow, transitioning into DevOps and cloud engineering.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mrembiasz.pl/about.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='monospace'>m</text></svg>">
+    <script src="theme.js"></script>
+</head>
+<body>
+    <div class="container container--wide">
+        <nav class="nav">
+            <a href="/">Mateusz Rembiasz</a>
+            <a href="/about.html" class="nav-active">About</a>
+            <a href="/homelab.html">Homelab</a>
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <svg class="icon-sun" viewBox="0 0 24 24"><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></svg>
+                <svg class="icon-moon" viewBox="0 0 24 24"><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.98 6.98 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></svg>
+            </button>
+        </nav>
+
+        <h1 class="page-title">About</h1>
+
+        <div class="prose">
+            <p>I'm a developer based in Kraków, Poland, currently working as a Flutter developer on a commercial project while studying at WSZiB (Wyższa Szkoła Zarządzania i Bankowości w Krakowie). I hold a Technik Programista diploma.</p>
+
+            <p>I started with a single bare-metal Debian install running a few self-hosted services. As I wanted faster local network and NAS speeds, I upgraded to 2.5G networking and later to 10G - that's when I picked up a real interest in networking. I moved to Proxmox, started running services in Docker Compose, and eventually picked up a Supermicro platform to grow into.</p>
+
+            <p>From there the focus shifted to declarative configuration - first Docker Compose files stored in Git, and now transitioning into Kubernetes and infrastructure as code where possible, all provisioned with Terraform and deployed via ArgoCD.</p>
+
+            <p>That progression is how I discovered that I want to be a DevOps and cloud engineer. I love IaC, clustering, and designing infrastructure - both virtual and bare metal.</p>
+        </div>
+
+        <p class="section-label">Currently studying</p>
+        <div class="spec-group">
+            <div class="spec-card">
+                <table class="spec-table">
+                    <tr><td>CCNA</td><td>Cisco networking (WSZiB course)</td></tr>
+                    <tr><td>AWS SAA</td><td>Solutions Architect Associate (self-study)</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <p class="section-label">Day to day</p>
+        <div class="spec-group">
+            <div class="spec-card">
+                <table class="spec-table">
+                    <tr><td>Work</td><td>Flutter developer (commercial project)</td></tr>
+                    <tr><td>Education</td><td>WSZiB, Krakow</td></tr>
+                    <tr><td>Focus</td><td>Transitioning into DevOps / Cloud</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
