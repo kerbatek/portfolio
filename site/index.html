@@ -4,182 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mateusz Rembiasz</title>
+    <meta name="description" content="Infrastructure, cloud, and self-hosting. Automating everything that shouldn't be done twice.">
+    <meta property="og:title" content="Mateusz Rembiasz">
+    <meta property="og:description" content="Infrastructure, cloud, and self-hosting. Automating everything that shouldn't be done twice.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mrembiasz.pl">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg: #fafaf9;
-            --text: #1c1917;
-            --muted: #78716c;
-            --accent: #292524;
-            --border: #e7e5e4;
-        }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .container {
-            max-width: 440px;
-            width: 100%;
-        }
-
-        .name {
-            font-size: 1.75rem;
-            font-weight: 500;
-            letter-spacing: -0.03em;
-            margin-bottom: 0.5rem;
-        }
-
-        .bio {
-            font-size: 0.95rem;
-            font-weight: 300;
-            line-height: 1.6;
-            color: var(--muted);
-            margin-bottom: 2.5rem;
-        }
-
-        .section-label {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.7rem;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--muted);
-            margin-bottom: 0.75rem;
-        }
-
-        .links {
-            list-style: none;
-            margin-bottom: 2.5rem;
-        }
-
-        .links li {
-            border-top: 1px solid var(--border);
-        }
-
-        .links li:last-child {
-            border-bottom: 1px solid var(--border);
-        }
-
-        .links a {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.8rem 0.25rem;
-            text-decoration: none;
-            color: var(--text);
-            font-size: 0.95rem;
-            font-weight: 400;
-            transition: padding-left 0.2s ease;
-        }
-
-        .links a:hover {
-            padding-left: 0.5rem;
-        }
-
-        .links .meta {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--muted);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .links .arrow {
-            transition: transform 0.2s ease;
-        }
-
-        .links a:hover .arrow {
-            transform: translateX(3px);
-        }
-
-        .social {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .social a {
-            color: var(--muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: color 0.2s ease;
-        }
-
-        .social a:hover {
-            color: var(--text);
-        }
-
-        .social svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-
-        @media (max-width: 480px) {
-            .name { font-size: 1.5rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='monospace'>m</text></svg>">
+    <script src="theme.js"></script>
 </head>
 <body>
     <div class="container">
+        <nav class="nav">
+            <a href="/" class="nav-active">Mateusz Rembiasz</a>
+            <a href="/about.html">About</a>
+            <a href="/homelab.html">Homelab</a>
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <svg class="icon-sun" viewBox="0 0 24 24"><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></svg>
+                <svg class="icon-moon" viewBox="0 0 24 24"><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.98 6.98 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></svg>
+            </button>
+        </nav>
+
         <h1 class="name">Mateusz Rembiasz</h1>
-	<p class="bio">Infrastructure, cloud, and self-hosting.<br> Automating everything that shouldn't be done twice.</p>
+        <p class="status">Looking for a junior DevOps / Cloud position</p>
+        <p class="bio">Infrastructure, cloud, and self-hosting.<br>Automating everything that shouldn't be done twice.</p>
+        <p class="tech">Kubernetes / Terraform / AWS / Linux / Docker / CI/CD</p>
 
         <p class="section-label">Projects</p>
-        <ul class="links">
-            <li>
-                <a href="https://github.com/kerbatek/infra" target="_blank" rel="noopener">
-                    <span>infra</span>
-                    <span class="meta"><span>HCL</span><span class="arrow">&rarr;</span></span>
-                </a>
-            </li>
-            <li>
-                <a href="https://github.com/kerbatek/gitops" target="_blank" rel="noopener">
-                    <span>gitops</span>
-                    <span class="meta"><span class="arrow">&rarr;</span></span>
-                </a>
-            </li>
-            <li>
-                <a href="https://github.com/kerbatek/url-shortener" target="_blank" rel="noopener">
-                    <span>url-shortener</span>
-                    <span class="meta"><span>Go</span><span class="arrow">&rarr;</span></span>
-                </a>
-            </li>
-        </ul>
-
-        <p class="section-label">Services</p>
-        <ul class="links">
-            <li>
-                <a href="https://files.mrembiasz.pl">
-                    <span>Files</span>
-                    <span class="meta"><span class="arrow">&rarr;</span></span>
-                </a>
-            </li>
-        </ul>
+        <div class="projects">
+            <a class="project" href="https://github.com/kerbatek/gitops" target="_blank" rel="noopener">
+                <div class="project-header">
+                    <span class="project-name">gitops</span>
+                    <span class="project-lang">YAML</span>
+                </div>
+                <p class="project-desc">Kubernetes cluster config with Helm charts, ArgoCD, and CI pipelines</p>
+            </a>
+            <a class="project" href="https://github.com/kerbatek/url-shortener" target="_blank" rel="noopener">
+                <div class="project-header">
+                    <span class="project-name">url-shortener</span>
+                    <span class="project-lang">Go</span>
+                </div>
+                <p class="project-desc">Self-hosted URL shortener with Gin, PostgreSQL, and a Grafana observability stack</p>
+            </a>
+            <a class="project" href="https://github.com/kerbatek/infra" target="_blank" rel="noopener">
+                <div class="project-header">
+                    <span class="project-name">infra</span>
+                    <span class="project-lang">HCL</span>
+                </div>
+                <p class="project-desc">Terraform provisioning a Talos Linux Kubernetes cluster on Proxmox</p>
+            </a>
+            <a class="project" href="https://github.com/kerbatek/portfolio" target="_blank" rel="noopener">
+                <div class="project-header">
+                    <span class="project-name">portfolio</span>
+                    <span class="project-lang">HTML</span>
+                </div>
+                <p class="project-desc">This site - containerized and deployed via GitOps</p>
+            </a>
+        </div>
 
         <p class="section-label">Elsewhere</p>
         <div class="social">
+            <a href="mailto:mateusz@mrembiasz.pl">
+                <svg viewBox="0 0 24 24"><path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"/><path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"/></svg>
+                Email
+            </a>
             <a href="https://github.com/kerbatek" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
                 GitHub
