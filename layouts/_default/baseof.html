@@ -20,28 +20,7 @@
     <script src="/theme.js"></script>
     <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-        function getTheme() {
-            return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default';
-        }
-        mermaid.initialize({ startOnLoad: true, theme: getTheme() });
-        document.addEventListener('DOMContentLoaded', function () {
-            var btn = document.querySelector('.theme-toggle');
-            if (!btn) return;
-            btn.addEventListener('click', async function () {
-                // Wait a tick for theme.js to update data-theme
-                await new Promise(r => setTimeout(r, 0));
-                document.querySelectorAll('.mermaid').forEach(function (el) {
-                    el.removeAttribute('data-processed');
-                    el.innerHTML = el.getAttribute('data-original');
-                });
-                mermaid.initialize({ startOnLoad: false, theme: getTheme() });
-                await mermaid.run();
-            });
-            // Store original diagram source for re-rendering
-            document.querySelectorAll('.mermaid').forEach(function (el) {
-                el.setAttribute('data-original', el.textContent);
-            });
-        });
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
     </script>
 </head>
 <body>

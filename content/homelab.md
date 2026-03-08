@@ -4,31 +4,21 @@ description: "Single-node Proxmox setup running a Kubernetes cluster, networking
 ---
 
 <p class="section-label">Topology</p>
-<pre class="diagram">
-Internet
-  │
-RB5009 ─── router / firewall
-  │
-CRS309-1G-8S+ ─── 10G core switch
-  ├── Proxmox Node (2x 10G SFP+)
-  │     ├── Talos Linux K8s Cluster
-  │     │     ├── ArgoCD
-  │     │     ├── Ingress-NGINX
-  │     │     ├── Cert-Manager
-  │     │     ├── MetalLB (BGP → RB5009)
-  │     │     ├── Longhorn Storage
-  │     │     └── Portfolio
-  │     ├── Docker Compose VMs
-  │     │     ├── Technitium DNS
-  │     │     ├── Vaultwarden
-  │     │     ├── Uptime Kuma
-  │     │     ├── ddclient
-  │     │     └── Caddy (reverse proxy)
-  │     └── Minecraft Server VM
-  │
-CSS318-16G-2S+ ─── 1G distribution
-  └── Clients
-</pre>
+
+```mermaid
+graph LR
+    Internet((Internet)) --> RB[RB5009<br/>Router / Firewall]
+    RB --> Core[CRS309-1G-8S+<br/>10G Core Switch]
+    Core -->|2x 10G| PVE[Proxmox Node]
+    Core --> Dist[CSS318-16G-2S+<br/>1G Distribution]
+    Dist --> Clients([Clients])
+
+    PVE -->|VLAN 215| K8s[Talos K8s Cluster]
+    PVE -->|VLAN 40| Docker[Docker Compose VMs]
+    PVE -->|VLAN 230| MC[Minecraft VM]
+
+    K8s -. "BGP · 10.0.216.0/26" .-> RB
+```
 
 <p class="section-label">Compute</p>
 <div class="spec-group">
