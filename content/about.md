@@ -4,7 +4,7 @@ description: "Developer based in Krakow, transitioning into DevOps and cloud eng
 ---
 
 <div class="prose">
-<p>I'm a developer based in Kraków, Poland, currently working as a Flutter developer on a commercial project while studying at WSZiB (Wyższa Szkoła Zarządzania i Bankowości w Krakowie). I hold a Technik Programista diploma.</p>
+<p>I'm currently working as a Flutter developer on a commercial project while studying at WSZiB (Wyższa Szkoła Zarządzania i Bankowości w Krakowie). I hold a Technik Programista diploma.</p>
 
 <p>I started with a single bare-metal Debian install running a few self-hosted services. As I wanted faster local network and NAS speeds, I upgraded to 2.5G networking and later to 10G - that's when I picked up a real interest in networking. I moved to Proxmox, started running services in Docker Compose, and eventually picked up a Supermicro platform to grow into.</p>
 
