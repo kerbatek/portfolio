@@ -73,15 +73,15 @@ This wasn't plug-and-play. A few things bit me:
 
 **GHCR auth is picky.** Even for public packages, GHCR requires authentication to list tags. My first attempt with a fine-grained PAT got `denied` — those don't play well with the Docker v2 registry API. Switching to a classic PAT with `read:packages` still didn't work until I changed the secret type from an opaque `secret:` reference to a `pullsecret:` (docker-registry format). That finally got the Image Updater to talk to GHCR properly.
 
-**Git write-back needs the right permissions.** The push to the gitops repo failed with `Password authentication is not supported for Git operations`. Needed a classic PAT with `repo` scope for that one too.
+**Git write-back needs the right permissions.** The push to the gitops repo initially failed — I thought fine-grained PATs didn't work with Git HTTP push, so I used a classic PAT with `repo` scope. Turns out I probably just had a typo when pasting the token. After retesting, fine-grained PATs work perfectly for git write-back. I've since switched `git-creds` to a fine-grained PAT scoped only to the gitops repo with `Contents: Read and write` — much better than a classic PAT's broad `repo` scope across all repositories.
 
-Turns out fine-grained PATs [can't access Packages at all](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#fine-grained-personal-access-tokens-limitations) — it's a [known gap](https://github.com/orgs/community/discussions/38467) that's been open since 2022. So for anything touching GHCR, classic PATs it is.
+Turns out fine-grained PATs [can't access Packages at all](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#fine-grained-personal-access-tokens-limitations) — it's a [known gap](https://github.com/orgs/community/discussions/38467) that's been open since 2022. So for anything touching GHCR, classic PATs it is. But for git operations, fine-grained PATs are the way to go.
 
 ### What it took
 
 - One `ImageUpdater` CRD defining what to track
 - A multi-source ArgoCD Application (Helm chart + CRs from git)
-- Two secrets (`ghcr-creds` as docker-registry type, `git-creds` with classic PAT)
+- Two secrets (`ghcr-creds` as docker-registry type, `git-creds` with fine-grained PAT)
 - Deleting the "update image tag in gitops" step from the portfolio CI
 - A custom commit message template so the auto-commits match the repo's `chore:` convention
 
