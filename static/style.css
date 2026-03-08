@@ -10,10 +10,11 @@
     --muted: #78716c;
     --accent: #292524;
     --border: #e7e5e4;
+    --hover-bg: #f0efed;
 }
 
 body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Geist', sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
@@ -25,19 +26,23 @@ body {
 }
 
 .container {
-    max-width: 440px;
+    max-width: 560px;
     width: 100%;
 }
 
 .container--wide {
-    max-width: 540px;
+    max-width: 680px;
 }
+
+/* Navigation */
 
 .nav {
     display: flex;
     align-items: center;
     gap: 1.25rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
 }
 
 .theme-toggle {
@@ -63,12 +68,16 @@ body {
 }
 
 .nav a {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     font-weight: 400;
     color: var(--muted);
     text-decoration: none;
     transition: color 0.2s ease;
+}
+
+.nav a:first-child {
+    color: var(--text);
 }
 
 .nav a:hover {
@@ -79,6 +88,8 @@ body {
     color: var(--text);
 }
 
+/* Hero */
+
 .name {
     font-size: 1.75rem;
     font-weight: 500;
@@ -87,23 +98,23 @@ body {
 }
 
 .status {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     font-weight: 400;
     color: var(--muted);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
 }
 
 .bio {
     font-size: 0.95rem;
     font-weight: 300;
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--muted);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
 }
 
 .tech {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.72rem;
     font-weight: 300;
     color: var(--muted);
@@ -111,20 +122,23 @@ body {
     margin-bottom: 2.5rem;
 }
 
+/* Section labels */
+
 .section-label {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.7rem;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--muted);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
+
+/* Project cards */
 
 .projects {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
     margin-bottom: 2.5rem;
 }
 
@@ -132,7 +146,14 @@ body {
     display: block;
     text-decoration: none;
     color: var(--text);
-    padding: 0.6rem 0;
+    padding: 0.6rem 0.75rem;
+    margin: 0 -0.75rem;
+    border-radius: 6px;
+    transition: background 0.15s ease;
+}
+
+.project:hover {
+    background: var(--hover-bg);
 }
 
 .project-header {
@@ -143,22 +164,21 @@ body {
 }
 
 .project-name {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.9rem;
     font-weight: 400;
-    text-decoration-line: underline;
+    text-decoration: underline;
     text-decoration-color: transparent;
     text-underline-offset: 3px;
-    transition: text-decoration-color 0.25s ease, letter-spacing 0.25s ease;
+    transition: text-decoration-color 0.2s ease;
 }
 
 .project:hover .project-name {
     text-decoration-color: var(--muted);
-    letter-spacing: 0.02em;
 }
 
 .project-lang {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.7rem;
     color: var(--muted);
     flex-shrink: 0;
@@ -170,22 +190,21 @@ body {
     color: var(--muted);
     line-height: 1.5;
     margin-top: 0.3rem;
-    transition: color 0.25s ease;
 }
 
-.project:hover .project-desc {
-    color: var(--text);
-}
+/* Social links */
 
 .social {
     display: flex;
     gap: 1.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .social a {
     color: var(--muted);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
     font-weight: 400;
     display: flex;
     align-items: center;
@@ -198,10 +217,22 @@ body {
 }
 
 .social svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     fill: currentColor;
 }
+
+/* Footer */
+
+.footer {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+}
+
+/* Page headings */
 
 .page-title {
     font-size: 1.5rem;
@@ -222,18 +253,22 @@ body {
     font-size: 0.78rem;
     font-weight: 300;
     color: var(--muted);
-    margin-top: -0.6rem;
+    margin-top: -0.4rem;
     margin-bottom: 1rem;
 }
 
+/* ASCII diagrams */
+
 .diagram {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.72rem;
     line-height: 1.7;
     color: var(--text);
     margin-bottom: 2.5rem;
     overflow-x: auto;
 }
+
+/* Spec tables */
 
 .spec-group {
     display: flex;
@@ -248,7 +283,7 @@ body {
 }
 
 .spec-title {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     font-weight: 400;
     color: var(--text);
@@ -268,7 +303,7 @@ body {
 }
 
 .spec-table td:first-child {
-    font-family: 'DM Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     font-weight: 400;
     color: var(--muted);
@@ -276,12 +311,14 @@ body {
     padding-right: 1rem;
 }
 
+/* Prose content */
+
 .prose {
     margin-bottom: 2.5rem;
 }
 
 .prose p {
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     font-weight: 300;
     line-height: 1.7;
     color: var(--muted);
@@ -291,6 +328,114 @@ body {
 .prose p:last-child {
     margin-bottom: 0;
 }
+
+.prose h2 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.prose h3 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.prose ul, .prose ol {
+    margin-bottom: 1rem;
+    padding-left: 1.25rem;
+}
+
+.prose li {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+}
+
+.prose code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    background: var(--hover-bg);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+}
+
+.prose pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    background: var(--hover-bg);
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+}
+
+.prose pre code {
+    background: none;
+    padding: 0;
+}
+
+.prose a {
+    color: var(--text);
+    text-decoration-color: var(--border);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease;
+}
+
+.prose a:hover {
+    text-decoration-color: var(--text);
+}
+
+.prose img {
+    display: block;
+    margin: 1.5rem auto;
+    max-width: 100%;
+}
+
+.prose blockquote {
+    border-left: 2px solid var(--border);
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.prose blockquote p {
+    font-style: italic;
+}
+
+/* Blog post meta */
+
+.post-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.post-tags a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.post-tags a:hover {
+    color: var(--text);
+}
+
+.post-tags a::before {
+    content: '#';
+}
+
+/* Plan list */
 
 .plan-list {
     list-style: none;
@@ -314,16 +459,35 @@ body {
     color: var(--border);
 }
 
+/* Dark mode */
+
 [data-theme="dark"] {
-    --bg: #1c1917;
-    --text: #e7e5e4;
-    --muted: #a8a29e;
-    --accent: #d6d3d1;
-    --border: #292524;
+    --bg: #18181b;
+    --text: #e4e4e7;
+    --muted: #a1a1aa;
+    --accent: #d4d4d8;
+    --border: #3f3f46;
+    --hover-bg: #27272a;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+    body { padding: 1.5rem; }
+    .nav { gap: 0.875rem; }
 }
 
 @media (max-width: 480px) {
+    body { padding: 1.25rem; }
     .name { font-size: 1.5rem; }
     .page-title { font-size: 1.3rem; }
     .diagram { font-size: 0.65rem; }
+    .nav { gap: 0.75rem; }
+    .nav a { font-size: 0.7rem; }
+}
+
+@media (max-width: 360px) {
+    body { padding: 1rem; }
+    .nav a { font-size: 0.65rem; }
+    .nav { gap: 0.5rem; }
 }

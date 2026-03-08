@@ -1,0 +1,22 @@
+{{ define "container-class" }} container--wide{{ end }}
+
+{{ define "main" }}
+<h1 class="page-title">Blog</h1>
+
+{{ $pages := .Pages }}
+{{ if $pages }}
+<div class="projects">
+    {{ range $pages }}
+    <a class="project" href="{{ .RelPermalink }}">
+        <div class="project-header">
+            <span class="project-name">{{ .Title }}</span>
+            <span class="project-lang">{{ .Date.Format "Jan 2, 2006" }}</span>
+        </div>
+        {{ with .Description }}<p class="project-desc">{{ . }}</p>{{ end }}
+    </a>
+    {{ end }}
+</div>
+{{ else }}
+<p class="bio">No posts yet.</p>
+{{ end }}
+{{ end }}
