@@ -19,26 +19,42 @@ So I switched to a pull model using [ArgoCD Image Updater](https://argocd-image-
 
 ### How it worked before
 
-```
-App CI → build image → push to GHCR
-       → clone gitops repo
-       → yq -i '.spec.source.helm.valuesObject.image.tag = "sha-abc123"'
-       → commit + push to main
-       → ArgoCD detects → syncs
+```mermaid
+graph LR
+    A([App CI]) --> B([Build]) --> C([Push]) --> D[(GHCR)]
+    D --> E([Clone gitops repo]) --> F([Update tag with yq]) --> G([Commit + push]) --> H{ArgoCD} --> I((Sync))
 ```
 
-The app repo had to know too much. It was tightly coupled to the gitops repo's internal structure, and it needed a secret (`GITOPS_TOKEN`) to write to a repo it shouldn't really care about.
+---
+
+```mermaid
+graph LR
+    A([App CI]) --> B([Build]) --> C([Push]) --> D[(GHCR)]
+```
+
+The app CI builds a container image tagged with the short commit SHA (`sha-abc1234`) and pushes it to GitHub Container Registry. This part is fine — it's what any CI should do.
+
+```mermaid
+graph LR
+    A([Clone gitops repo]) --> B([Update tag with yq]) --> C([Commit + push to main])
+```
+
+Here's where it gets messy. The same CI job clones the entire gitops repo, runs `yq` to update the image tag inside an ArgoCD Application manifest, and pushes the change to `main`. The app repo needs a `GITOPS_TOKEN` with write access, knows the exact file path and YAML structure of the gitops repo, and breaks the moment anything gets refactored.
+
+```mermaid
+graph LR
+    A{ArgoCD} --> B((Sync))
+```
+
+ArgoCD detects the new commit on `main` within 30 seconds and rolls out the new image. This part is also fine — it's what ArgoCD is built for.
 
 ### How it works now
 
-```
-App CI → build image → push to GHCR → done.
-
-Image Updater (running in-cluster)
-  → polls GHCR every 2 minutes
-  → finds new tag matching ^sha-[a-f0-9]+$
-  → commits .argocd-source-portfolio.yaml to gitops repo
-  → ArgoCD detects → syncs
+```mermaid
+graph LR
+    A([App CI]) --> B([Build]) --> C([Push]) --> D[(GHCR)]
+    E([Image Updater]) -. polls every 2 min .-> D
+    E --> F([Find new SHA tag]) --> G([Commit .argocd-source]) --> H{ArgoCD} --> I((Sync))
 ```
 
 The app repo's only job is to build and push an image. It doesn't know the gitops repo exists :)
@@ -49,11 +65,26 @@ One thing I almost missed: my root Application has `selfHeal: true`. Without git
 
 Git write-back solves this. The updater commits a small override file (`.argocd-source-portfolio.yaml`) to the chart directory, so git stays the source of truth and self-heal has nothing to complain about.
 
+### The bumps along the way
+
+This wasn't plug-and-play. A few things bit me:
+
+**Annotations don't work anymore.** I initially configured the Image Updater using annotations on the Application resource — that's what most guides online still show. Turns out v1.0+ moved to a CRD-based model. The controller just logged `No ImageUpdater CRs to process` and ignored everything. Had to create an `ImageUpdater` custom resource instead.
+
+**GHCR auth is picky.** Even for public packages, GHCR requires authentication to list tags. My first attempt with a fine-grained PAT got `denied` — those don't play well with the Docker v2 registry API. Switching to a classic PAT with `read:packages` still didn't work until I changed the secret type from an opaque `secret:` reference to a `pullsecret:` (docker-registry format). That finally got the Image Updater to talk to GHCR properly.
+
+**Git write-back needs the right permissions.** The push to the gitops repo failed with `Password authentication is not supported for Git operations`. Needed a classic PAT with `repo` scope for that one too.
+
+Turns out fine-grained PATs [can't access Packages at all](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#fine-grained-personal-access-tokens-limitations) — it's a [known gap](https://github.com/orgs/community/discussions/38467) that's been open since 2022. So for anything touching GHCR, classic PATs it is.
+
 ### What it took
 
-- One new ArgoCD Application for the Image Updater itself
-- Five annotations on the portfolio Application
-- Two secrets (`ghcr-creds` for registry read, `git-creds` for write-back)
+- One `ImageUpdater` CRD defining what to track
+- A multi-source ArgoCD Application (Helm chart + CRs from git)
+- Two secrets (`ghcr-creds` as docker-registry type, `git-creds` with classic PAT)
 - Deleting the "update image tag in gitops" step from the portfolio CI
+- A custom commit message template so the auto-commits match the repo's `chore:` convention
 
-The best part: adding the next app is just annotations. No new CI wiring, no new secrets, no new PATs. ;)
+The best part: adding the next app is just a new YAML file. No new CI wiring, no new secrets, no new PATs. ;)
+
+![engineering](/img/engineering.gif)
