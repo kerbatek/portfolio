@@ -40,7 +40,7 @@
 {{ if $posts }}
 <p class="section-label">Recent posts</p>
 <div class="projects">
-    {{ range first 3 $posts }}
+    {{ range first 3 $posts.ByDate.Reverse }}
     <a class="project" href="{{ .RelPermalink }}">
         <div class="project-header">
             <span class="project-name">{{ .Title }}</span>

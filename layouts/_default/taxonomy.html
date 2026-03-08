@@ -1,10 +1,20 @@
 {{ define "container-class" }} container--wide{{ end }}
 
 {{ define "main" }}
-<h1 class="page-title">{{ .Title }}</h1>
+<h1 class="page-title">Blog</h1>
+
+{{ $allTags := .Site.Taxonomies.tags }}
+{{ if $allTags }}
+<div class="post-tags">
+    <a class="tag-clear" href="/blog/">any</a>
+    {{ range $allTags.Alphabetical }}
+    <a {{ if eq $.Title .Name }}class="tag-active"{{ end }} href="{{ "tags/" | absURL }}{{ .Name | urlize }}/">{{ .Name }}</a>
+    {{ end }}
+</div>
+{{ end }}
 
 <div class="projects">
-    {{ range .Pages }}
+    {{ range .Pages.ByDate.Reverse }}
     <a class="project" href="{{ .RelPermalink }}">
         <div class="project-header">
             <span class="project-name">{{ .Title }}</span>

@@ -42,18 +42,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Update image tag in gitops
-        env:
-          GITOPS_TOKEN: ${{ secrets.GITOPS_TOKEN }}
-        run: |
-          export SHA="sha-${GITHUB_SHA:0:7}"
-          git clone https://x-token:${GITOPS_TOKEN}@github.com/kerbatek/gitops.git /tmp/gitops
-          cd /tmp/gitops
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          yq -i '.spec.source.helm.valuesObject.image.tag = strenv(SHA)' k8s/argocd/apps/portfolio.yaml
-          git add k8s/argocd/apps/portfolio.yaml
-          git commit -m "chore: bump portfolio image to ${SHA}"
-          git pull --rebase
-          git push

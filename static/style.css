@@ -427,12 +427,21 @@ body {
     transition: color 0.2s ease;
 }
 
-.post-tags a:hover {
+.post-tags a:hover,
+.post-tags a.tag-active {
     color: var(--text);
 }
 
 .post-tags a::before {
     content: '#';
+}
+
+.post-tags a.tag-clear::before {
+    content: '#';
+}
+
+.post-tags a.tag-clear {
+    color: var(--text);
 }
 
 /* Plan list */
