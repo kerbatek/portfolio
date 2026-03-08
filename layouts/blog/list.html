@@ -3,7 +3,16 @@
 {{ define "main" }}
 <h1 class="page-title">Blog</h1>
 
-{{ $pages := .Pages }}
+{{ $allTags := .Site.Taxonomies.tags }}
+{{ if $allTags }}
+<div class="post-tags">
+    {{ range $allTags.Alphabetical }}
+    <a href="{{ "tags/" | absURL }}{{ .Name | urlize }}/">{{ .Name }}</a>
+    {{ end }}
+</div>
+{{ end }}
+
+{{ $pages := .Pages.ByDate.Reverse }}
 {{ if $pages }}
 <div class="projects">
     {{ range $pages }}
