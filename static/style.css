@@ -318,7 +318,7 @@ body {
 }
 
 .prose p {
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     font-weight: 300;
     line-height: 1.7;
     color: var(--muted);
@@ -350,7 +350,7 @@ body {
 }
 
 .prose li {
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     font-weight: 300;
     line-height: 1.7;
     color: var(--muted);
@@ -391,6 +391,12 @@ body {
 
 .prose a:hover {
     text-decoration-color: var(--text);
+}
+
+.prose img {
+    display: block;
+    margin: 1.5rem auto;
+    max-width: 100%;
 }
 
 .prose blockquote {
