@@ -1,3 +1,7 @@
+/* Type scale: 1.2 (minor third)
+ * 2xl: 1.73rem | xl: 1.44rem | lg: 1.2rem | base: 1rem | sm: 0.83rem | xs: 0.69rem | 2xs: 0.58rem
+ */
+
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -26,12 +30,12 @@ body {
 }
 
 .container {
-    max-width: 560px;
+    max-width: 60ch;
     width: 100%;
 }
 
 .container--wide {
-    max-width: 680px;
+    max-width: 75ch;
 }
 
 /* Navigation */
@@ -69,7 +73,7 @@ body {
 
 .nav a {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.69rem;
     font-weight: 400;
     color: var(--muted);
     text-decoration: none;
@@ -91,7 +95,7 @@ body {
 /* Hero */
 
 .name {
-    font-size: 1.75rem;
+    font-size: 1.73rem;
     font-weight: 500;
     letter-spacing: -0.03em;
     margin-bottom: 0.5rem;
@@ -99,14 +103,14 @@ body {
 
 .status {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.69rem;
     font-weight: 400;
     color: var(--muted);
     margin-bottom: 1rem;
 }
 
 .bio {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 300;
     line-height: 1.65;
     color: var(--muted);
@@ -115,7 +119,7 @@ body {
 
 .tech {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.69rem;
     font-weight: 300;
     color: var(--muted);
     letter-spacing: 0.02em;
@@ -126,7 +130,7 @@ body {
 
 .section-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.69rem;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -165,7 +169,7 @@ body {
 
 .project-name {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem;
+    font-size: 0.83rem;
     font-weight: 400;
     text-decoration: underline;
     text-decoration-color: transparent;
@@ -179,13 +183,13 @@ body {
 
 .project-lang {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.69rem;
     color: var(--muted);
     flex-shrink: 0;
 }
 
 .project-desc {
-    font-size: 0.82rem;
+    font-size: 0.83rem;
     font-weight: 300;
     color: var(--muted);
     line-height: 1.5;
@@ -204,7 +208,7 @@ body {
     color: var(--muted);
     text-decoration: none;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.69rem;
     font-weight: 400;
     display: flex;
     align-items: center;
@@ -228,21 +232,21 @@ body {
     padding-top: 1.25rem;
     border-top: 1px solid var(--border);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
+    font-size: 0.69rem;
     color: var(--muted);
 }
 
 /* Page headings */
 
 .page-title {
-    font-size: 1.5rem;
+    font-size: 1.44rem;
     font-weight: 500;
     letter-spacing: -0.03em;
     margin-bottom: 0.5rem;
 }
 
 .page-subtitle {
-    font-size: 0.9rem;
+    font-size: 0.83rem;
     font-weight: 300;
     line-height: 1.6;
     color: var(--muted);
@@ -250,7 +254,7 @@ body {
 }
 
 .section-note {
-    font-size: 0.78rem;
+    font-size: 0.83rem;
     font-weight: 300;
     color: var(--muted);
     margin-top: -0.4rem;
@@ -261,7 +265,7 @@ body {
 
 .diagram {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.69rem;
     line-height: 1.7;
     color: var(--text);
     margin-bottom: 2.5rem;
@@ -284,7 +288,7 @@ body {
 
 .spec-title {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.69rem;
     font-weight: 400;
     color: var(--text);
     margin-bottom: 0.5rem;
@@ -296,7 +300,7 @@ body {
 }
 
 .spec-table td {
-    font-size: 0.82rem;
+    font-size: 0.83rem;
     font-weight: 300;
     padding: 0.25rem 0;
     vertical-align: top;
@@ -304,7 +308,7 @@ body {
 
 .spec-table td:first-child {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.69rem;
     font-weight: 400;
     color: var(--muted);
     width: 40%;
@@ -318,7 +322,7 @@ body {
 }
 
 .prose p {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 300;
     line-height: 1.7;
     color: var(--muted);
@@ -330,7 +334,7 @@ body {
 }
 
 .prose h2 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 500;
     letter-spacing: -0.02em;
     margin-top: 2rem;
@@ -338,7 +342,7 @@ body {
 }
 
 .prose h3 {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 500;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
@@ -350,7 +354,7 @@ body {
 }
 
 .prose li {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 300;
     line-height: 1.7;
     color: var(--muted);
@@ -359,7 +363,7 @@ body {
 
 .prose code {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.83rem;
     background: var(--hover-bg);
     padding: 0.15rem 0.4rem;
     border-radius: 3px;
@@ -367,7 +371,7 @@ body {
 
 .prose pre {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
+    font-size: 0.83rem;
     line-height: 1.6;
     background: var(--hover-bg);
     padding: 1rem;
@@ -380,6 +384,22 @@ body {
 .prose pre code {
     background: none;
     padding: 0;
+}
+
+.prose pre.mermaid {
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: center;
+    line-height: normal;
+    font-family: 'Geist', sans-serif;
+    font-size: 1rem;
+}
+
+.prose hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.5rem 0;
 }
 
 .prose a {
@@ -413,7 +433,7 @@ body {
 
 .post-meta {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.69rem;
     color: var(--muted);
     margin-bottom: 2rem;
     display: flex;
@@ -452,7 +472,7 @@ body {
 }
 
 .plan-list li {
-    font-size: 0.82rem;
+    font-size: 0.83rem;
     font-weight: 300;
     color: var(--muted);
     line-height: 1.6;
@@ -473,7 +493,7 @@ body {
 [data-theme="dark"] {
     --bg: #18181b;
     --text: #e4e4e7;
-    --muted: #a1a1aa;
+    --muted: #c4c4ca;
     --accent: #d4d4d8;
     --border: #3f3f46;
     --hover-bg: #27272a;
@@ -488,15 +508,13 @@ body {
 
 @media (max-width: 480px) {
     body { padding: 1.25rem; }
-    .name { font-size: 1.5rem; }
-    .page-title { font-size: 1.3rem; }
-    .diagram { font-size: 0.65rem; }
+    .name { font-size: 1.44rem; }
+    .page-title { font-size: 1.2rem; }
+    .diagram { font-size: 0.58rem; }
     .nav { gap: 0.75rem; }
-    .nav a { font-size: 0.7rem; }
 }
 
 @media (max-width: 360px) {
     body { padding: 1rem; }
-    .nav a { font-size: 0.65rem; }
     .nav { gap: 0.5rem; }
 }
