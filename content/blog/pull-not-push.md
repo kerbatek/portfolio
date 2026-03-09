@@ -2,7 +2,7 @@
 title: "Pull, Not Push"
 date: 2026-03-08T19:30:00
 description: "How I replaced my CI-driven image tag bumping with ArgoCD Image Updater."
-tags: ["gitops", "argocd", "ci-cd"]
+tags: ["gitops", "argocd", "ci-cd", "kubernetes", "homelab"]
 ---
 
 Up until today, every time my portfolio app built a new container image, the CI pipeline would clone the gitops repo, update the image tag in the ArgoCD Application manifest, and push the commit. A classic push model.
