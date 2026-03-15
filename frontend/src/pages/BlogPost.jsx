@@ -3,23 +3,30 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import { getPost } from '../lib/posts'
+import { getPost } from '../lib/api'
+import { useFetch } from '../hooks/useFetch'
 import { markdownComponents } from '../lib/markdownComponents'
 import { formatDate } from '../lib/dateFormat'
 
 export default function BlogPost() {
   const { slug } = useParams()
-  const post = getPost(slug)
+  const { data: post, loading, error } = useFetch(() => getPost(slug), [slug])
 
-  if (!post) {
-    return (
-      <div className="container">
-        <Nav />
-        <p className="page-subtitle">Post not found.</p>
-        <Footer />
-      </div>
-    )
-  }
+  if (loading) return (
+    <div className="container">
+      <Nav />
+      <p className="page-subtitle">Loading...</p>
+      <Footer />
+    </div>
+  )
+
+  if (error || !post) return (
+    <div className="container">
+      <Nav />
+      <p className="page-subtitle">Post not found.</p>
+      <Footer />
+    </div>
+  )
 
   return (
     <div className="container">

@@ -1,12 +1,31 @@
 import { useParams, Link } from 'react-router-dom'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import { getPostsByTag } from '../lib/posts'
+import { getPosts } from '../lib/api'
+import { useFetch } from '../hooks/useFetch'
 import { formatDate } from '../lib/dateFormat'
 
 export default function TagDetail() {
   const { tag } = useParams()
-  const tagged = getPostsByTag(tag)
+  const { data: posts, loading, error } = useFetch(getPosts, [])
+
+  if (loading) return (
+    <div className="container">
+      <Nav />
+      <p className="page-subtitle">Loading...</p>
+      <Footer />
+    </div>
+  )
+
+  if (error) return (
+    <div className="container">
+      <Nav />
+      <p className="page-subtitle">Failed to load posts.</p>
+      <Footer />
+    </div>
+  )
+
+  const tagged = posts.filter(p => p.tags?.includes(tag))
 
   return (
     <div className="container">

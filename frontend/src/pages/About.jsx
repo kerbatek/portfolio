@@ -1,22 +1,36 @@
-import { parseFrontmatter } from '../lib/frontmatter'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-
-const raw = Object.values(
-  import.meta.glob('../content/about.md', { query: '?raw', import: 'default', eager: true })
-)[0] ?? ''
-const { data, content } = parseFrontmatter(raw)
+import { getPage } from '../lib/api'
+import { useFetch } from '../hooks/useFetch'
 
 export default function About() {
+  const { data: page, loading, error } = useFetch(() => getPage('about'), [])
+
+  if (loading) return (
+    <div className="container">
+      <Nav />
+      <p className="page-subtitle">Loading...</p>
+      <Footer />
+    </div>
+  )
+
+  if (error) return (
+    <div className="container">
+      <Nav />
+      <p className="page-subtitle">Failed to load page.</p>
+      <Footer />
+    </div>
+  )
+
   return (
     <div className="container">
       <Nav />
-      <h1 className="page-title">{data.title ?? 'About'}</h1>
-      {data.description && <p className="page-subtitle">{data.description}</p>}
+      <h1 className="page-title">{page.title ?? 'About'}</h1>
+      {page.description && <p className="page-subtitle">{page.description}</p>}
       <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-        {content}
+        {page.content}
       </ReactMarkdown>
       <Footer />
     </div>

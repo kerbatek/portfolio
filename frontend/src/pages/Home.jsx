@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import { posts } from '../lib/posts'
+import { getPosts } from '../lib/api'
+import { useFetch } from '../hooks/useFetch'
 import { formatDateShort } from '../lib/dateFormat'
 
 const projects = [
@@ -31,9 +32,10 @@ const projects = [
   },
 ]
 
-const recentPosts = posts.slice(0, 3)
-
 export default function Home() {
+  const { data: posts } = useFetch(getPosts, [])
+  const recentPosts = posts?.slice(0, 3) ?? []
+
   return (
     <div className="container">
       <Nav />
