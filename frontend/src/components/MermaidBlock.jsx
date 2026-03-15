@@ -1,20 +1,43 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import mermaid from 'mermaid'
 
-mermaid.initialize({ startOnLoad: false, theme: 'neutral' })
+let counter = 0
 
-export default function MermaidBlock({ children }) {
-  const ref = useRef()
+async function renderTheme(source, theme, themeVariables = {}) {
+  mermaid.initialize({ startOnLoad: false, theme, themeVariables })
+  const id = `mermaid-${++counter}`
+  const { svg } = await mermaid.render(id, source)
+  return svg
+}
+
+export default function MermaidBlock({ children, onReady }) {
+  const [light, setLight] = useState('')
+  const [dark, setDark] = useState('')
+  const [ready, setReady] = useState(false)
+  const source = String(children).trim()
 
   useEffect(() => {
-    if (ref.current) {
-      mermaid.run({ nodes: [ref.current] })
+    let cancelled = false
+    async function renderBoth() {
+      const [lightSvg, darkSvg] = await Promise.all([
+        renderTheme(source, 'neutral', { primaryTextColor: '#ffffff' }),
+        renderTheme(source, 'dark'),
+      ])
+      if (!cancelled) {
+        setLight(lightSvg)
+        setDark(darkSvg)
+        setReady(true)
+        onReady?.()
+      }
     }
-  }, [children])
+    renderBoth()
+    return () => { cancelled = true }
+  }, [source])
 
   return (
-    <pre className="mermaid" ref={ref}>
-      {children}
-    </pre>
+    <div className={`mermaid-diagram${ready ? ' mermaid-ready' : ''}`}>
+      <div className="mermaid-light" dangerouslySetInnerHTML={{ __html: light }} />
+      <div className="mermaid-dark" dangerouslySetInnerHTML={{ __html: dark }} />
+    </div>
   )
 }
