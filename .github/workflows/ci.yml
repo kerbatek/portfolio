@@ -6,7 +6,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push:
@@ -14,6 +13,16 @@ jobs:
     permissions:
       contents: read
       packages: write
+
+    strategy:
+      matrix:
+        include:
+          - component: frontend
+            context: ./frontend
+            image: ghcr.io/${{ github.repository }}-frontend
+          - component: backend
+            context: ./backend
+            image: ghcr.io/${{ github.repository }}-backend
 
     steps:
       - name: Checkout
@@ -30,7 +39,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ matrix.image }}
           tags: |
             type=raw,value=latest
             type=sha,prefix=sha-
@@ -38,7 +47,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ${{ matrix.context }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
