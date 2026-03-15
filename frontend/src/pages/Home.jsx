@@ -1,9 +1,8 @@
-import { Link } from 'react-router-dom'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import PostCard from '../components/PostCard'
 import { getPosts } from '../lib/api'
 import { useFetch } from '../hooks/useFetch'
-import { formatDateShort } from '../lib/dateFormat'
 
 const projects = [
   {
@@ -62,15 +61,7 @@ export default function Home() {
         <>
           <p className="section-label">Recent posts</p>
           <div className="projects">
-            {recentPosts.map(post => (
-              <Link key={post.slug} className="project" to={`/blog/${post.slug}`}>
-                <div className="project-header">
-                  <span className="project-name">{post.title}</span>
-                  <span className="project-lang">{formatDateShort(post.date)}</span>
-                </div>
-                {post.description && <p className="project-desc">{post.description}</p>}
-              </Link>
-            ))}
+            {recentPosts.map(post => <PostCard key={post.slug} post={post} short />)}
           </div>
         </>
       )}

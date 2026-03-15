@@ -8,5 +8,4 @@ async function get(path) {
 
 export const getPosts = () => get('/posts')
 export const getPost  = (slug) => get(`/posts/${slug}`)
-export const getTags  = () => get('/tags')
 export const getPage  = (slug) => get(`/pages/${slug}`)
