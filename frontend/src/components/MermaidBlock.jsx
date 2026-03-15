@@ -19,10 +19,8 @@ export default function MermaidBlock({ children, onReady }) {
   useEffect(() => {
     let cancelled = false
     async function renderBoth() {
-      const [lightSvg, darkSvg] = await Promise.all([
-        renderTheme(source, 'neutral', { primaryTextColor: '#ffffff' }),
-        renderTheme(source, 'dark'),
-      ])
+      const lightSvg = await renderTheme(source, 'neutral', { primaryTextColor: '#ffffff' })
+      const darkSvg = await renderTheme(source, 'dark')
       if (!cancelled) {
         setLight(lightSvg)
         setDark(darkSvg)

@@ -2,7 +2,7 @@ package content
 
 import (
 	"io/fs"
-	"path/filepath"
+	"path"
 	"sort"
 	"strings"
 	"time"
@@ -48,7 +48,7 @@ func Load(fsys fs.FS) (*Store, error) {
 			continue
 		}
 
-		raw, err := fs.ReadFile(fsys, filepath.Join("blog", e.Name()))
+		raw, err := fs.ReadFile(fsys, path.Join("blog", e.Name()))
 		if err != nil {
 			return nil, err
 		}
@@ -67,10 +67,12 @@ func Load(fsys fs.FS) (*Store, error) {
 		store.Posts = append(store.Posts, post)
 	}
 
+	dates := make([]time.Time, len(store.Posts))
+	for i, p := range store.Posts {
+		dates[i] = parseDate(p.Date)
+	}
 	sort.Slice(store.Posts, func(i, j int) bool {
-		ti := parseDate(store.Posts[i].Date)
-		tj := parseDate(store.Posts[j].Date)
-		return ti.After(tj)
+		return dates[i].After(dates[j])
 	})
 
 	tagSet := make(map[string]struct{})
