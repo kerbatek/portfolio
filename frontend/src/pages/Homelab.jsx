@@ -5,9 +5,11 @@ import PageShell from '../components/PageShell'
 import { getPage } from '../lib/api'
 import { useFetch } from '../hooks/useFetch'
 import { useMermaid } from '../hooks/useMermaid'
+import { useMeta } from '../hooks/useMeta'
 
 export default function Homelab() {
   const { data: page, loading, error } = useFetch(() => getPage('homelab'), [])
+  useMeta({ title: page?.title ?? 'Homelab', description: page?.description, path: '/homelab' })
   const { mermaidLoading, markdownComponents } = useMermaid(page?.content)
 
   return (

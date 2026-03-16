@@ -3,10 +3,12 @@ import PageShell from '../components/PageShell'
 import PostCard from '../components/PostCard'
 import { getPosts } from '../lib/api'
 import { useFetch } from '../hooks/useFetch'
+import { useMeta } from '../hooks/useMeta'
 
 export default function Blog() {
   const { tag } = useParams()
   const { data: posts, loading, error } = useFetch(getPosts, [])
+  useMeta({ title: tag ? `#${tag}` : 'Blog', path: tag ? `/tags/${tag}` : '/blog' })
 
   const allTags = posts ? [...new Set(posts.flatMap(p => p.tags ?? []))].sort() : []
   const filtered = tag ? posts?.filter(p => p.tags?.includes(tag)) : posts

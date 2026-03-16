@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import mermaid from 'mermaid'
 
 let counter = 0
@@ -15,6 +15,8 @@ export default function MermaidBlock({ children, onReady }) {
   const [dark, setDark] = useState('')
   const [ready, setReady] = useState(false)
   const source = String(children).trim()
+  const onReadyRef = useRef(onReady)
+  useEffect(() => { onReadyRef.current = onReady })
 
   useEffect(() => {
     let cancelled = false
@@ -25,7 +27,7 @@ export default function MermaidBlock({ children, onReady }) {
         setLight(lightSvg)
         setDark(darkSvg)
         setReady(true)
-        onReady?.()
+        onReadyRef.current?.()
       }
     }
     renderBoth()

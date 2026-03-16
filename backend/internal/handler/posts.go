@@ -8,8 +8,12 @@ import (
 )
 
 func ListPosts(store *content.Store) gin.HandlerFunc {
+	meta := make([]content.PostMeta, len(store.Posts))
+	for i, p := range store.Posts {
+		meta[i] = p.ToMeta()
+	}
 	return func(c *gin.Context) {
-		c.JSON(http.StatusOK, store.Posts)
+		c.JSON(http.StatusOK, meta)
 	}
 }
 

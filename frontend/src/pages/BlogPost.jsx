@@ -6,10 +6,12 @@ import { getPost } from '../lib/api'
 import { useFetch } from '../hooks/useFetch'
 import { useMermaid } from '../hooks/useMermaid'
 import { formatDate } from '../lib/dateFormat'
+import { useMeta } from '../hooks/useMeta'
 
 export default function BlogPost() {
   const { slug } = useParams()
   const { data: post, loading, error } = useFetch(() => getPost(slug), [slug])
+  useMeta({ title: post?.title, description: post?.description, type: 'article', path: `/blog/${slug}` })
   const { mermaidLoading, markdownComponents } = useMermaid(post?.content)
 
   return (

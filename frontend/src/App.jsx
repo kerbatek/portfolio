@@ -4,6 +4,16 @@ import About from './pages/About'
 import Homelab from './pages/Homelab'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
+import PageShell from './components/PageShell'
+
+function NotFound() {
+  return (
+    <PageShell>
+      <h1 className="page-title">404</h1>
+      <p className="page-subtitle">Page not found.</p>
+    </PageShell>
+  )
+}
 
 function AnimatedRoutes() {
   const location = useLocation()
@@ -15,6 +25,7 @@ function AnimatedRoutes() {
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:slug" element={<BlogPost />} />
       <Route path="/tags/:tag" element={<Blog />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }

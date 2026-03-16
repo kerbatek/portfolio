@@ -17,6 +17,24 @@ type Post struct {
 	Content     string   `json:"content,omitempty"`
 }
 
+type PostMeta struct {
+	Slug        string   `json:"slug"`
+	Title       string   `json:"title"`
+	Date        string   `json:"date"`
+	Description string   `json:"description"`
+	Tags        []string `json:"tags"`
+}
+
+func (p Post) ToMeta() PostMeta {
+	return PostMeta{
+		Slug:        p.Slug,
+		Title:       p.Title,
+		Date:        p.Date,
+		Description: p.Description,
+		Tags:        p.Tags,
+	}
+}
+
 type Page struct {
 	Slug        string `json:"slug"`
 	Title       string `json:"title"`

@@ -1,8 +1,8 @@
-import Nav from '../components/Nav'
-import Footer from '../components/Footer'
+import PageShell from '../components/PageShell'
 import PostCard from '../components/PostCard'
 import { getPosts } from '../lib/api'
 import { useFetch } from '../hooks/useFetch'
+import { useMeta } from '../hooks/useMeta'
 
 const projects = [
   {
@@ -32,13 +32,12 @@ const projects = [
 ]
 
 export default function Home() {
+  useMeta({ description: 'Infrastructure, cloud, and self-hosting.' })
   const { data: posts } = useFetch(getPosts, [])
   const recentPosts = posts?.slice(0, 3) ?? []
 
   return (
-    <div className="container">
-      <Nav />
-
+    <PageShell>
       <h1 className="name">Mateusz Rembiasz</h1>
       <p className="status">Looking for a junior DevOps / Cloud position</p>
       <p className="bio">Infrastructure, cloud, and self-hosting.<br />Automating everything that shouldn't be done twice.</p>
@@ -89,7 +88,6 @@ export default function Home() {
         </a>
       </div>
 
-      <Footer />
-    </div>
+    </PageShell>
   )
 }
