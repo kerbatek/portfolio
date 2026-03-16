@@ -1,21 +1,30 @@
 # Portfolio
 
-Personal site built with Hugo, containerized and deployed via GitOps.
+Personal site built with React + Go, containerized and deployed via GitOps.
 
 **[mrembiasz.pl](https://mrembiasz.pl)**
 
 ## Stack
 
-- Hugo static site generator
-- Nginx Alpine
+- React SPA (Vite) — frontend
+- Go + Gin — content API backend
+- Nginx Alpine — serves the frontend bundle
 - GitHub Actions → GHCR → ArgoCD ([gitops](https://github.com/kerbatek/gitops))
+
+See `docs/adr/` for architectural decisions.
 
 ## Local dev
 
 ```
-hugo server
+# backend (port 8080)
+cd backend && go run .
+
+# frontend (port 5173, proxies /api to 8080)
+cd frontend && npm run dev
 ```
 
 ```
-docker build -t portfolio . && docker run -p 8080:80 portfolio
+# build both images
+docker build -t portfolio-frontend ./frontend
+docker build -t portfolio-backend  ./backend
 ```
