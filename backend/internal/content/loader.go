@@ -85,12 +85,8 @@ func Load(fsys fs.FS) (*Store, error) {
 		store.Posts = append(store.Posts, post)
 	}
 
-	dates := make([]time.Time, len(store.Posts))
-	for i, p := range store.Posts {
-		dates[i] = parseDate(p.Date)
-	}
 	sort.Slice(store.Posts, func(i, j int) bool {
-		return dates[i].After(dates[j])
+		return parseDate(store.Posts[i].Date).After(parseDate(store.Posts[j].Date))
 	})
 
 	tagSet := make(map[string]struct{})
@@ -177,13 +173,14 @@ func parseArray(val string) []string {
 
 func parseDate(s string) time.Time {
 	formats := []string{
+		"2006-01-02T15:04:05Z07:00",
 		"2006-01-02T15:04:05",
 		"2006-01-02",
 	}
 	for _, f := range formats {
 		t, err := time.Parse(f, s)
 		if err == nil {
-			return t
+			return t.UTC()
 		}
 	}
 	return time.Time{}
