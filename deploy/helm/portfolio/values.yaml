@@ -1,5 +1,5 @@
 global:
-  imageTag: sha-6aece2c
+  imageTag: sha-0d9afe2
 
 frontend:
   image:
