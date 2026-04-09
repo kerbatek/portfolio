@@ -47,5 +47,5 @@ The Argo CD source of truth changes accordingly:
 - Adding new application services does not require editing the chart in a separate repository
 - The `gitops` repository remains the control plane for cluster state and environment policy, which preserves the GitOps story instead of turning the app repo into cluster infrastructure
 - The Argo CD configuration becomes slightly more complex because it must reference a chart from another repository and keep environment-specific overrides separate
-- The existing Argo CD Image Updater setup for portfolio should be removed or replaced, since external write-back to `gitops` conflicts with the goal of coupling deployment definition to the application version
+- The previous Argo CD Image Updater setup for portfolio is removed, since external write-back to `gitops` conflicts with the goal of coupling deployment definition to the application version
 - If a future runtime dependency is tightly coupled but operationally stateful, an explicit decision will still be needed on whether it belongs as an optional chart dependency or as separately managed platform infrastructure
