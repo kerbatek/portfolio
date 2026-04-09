@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Accepted (deployment promotion mechanism superseded by [ADR-0006](0006-branch-coupled-chart-promotion.md))
 
 ## Context
 
@@ -27,7 +27,7 @@ In Kubernetes, each image maps to its own Deployment. A single Ingress routes tr
 - `/api/` → `portfolio-backend` service (port 8080)
 - `/` → `portfolio-frontend` service (port 80)
 
-ArgoCD Image Updater watches both Deployments independently, so a content-only change to the backend triggers a rollout of the backend only — the frontend is untouched.
+The branch-coupled chart promotion flow (ADR-0006) updates the chart tag on the active branch, so a content-only change to the backend can still roll out independently without touching the frontend image reference.
 
 ## Consequences
 

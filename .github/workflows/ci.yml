@@ -2,13 +2,14 @@ name: Build and Push to GHCR
 
 on:
   push:
-    branches: [main]
+    branches: [main, testing]
 
 env:
   REGISTRY: ghcr.io
 
 jobs:
   build-and-push:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -51,3 +52,32 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  update-chart:
+    if: github.actor != 'github-actions[bot]'
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Update chart release tag
+        run: |
+          SHORT_SHA="sha-${GITHUB_SHA::7}"
+          sed -i.bak "s/^appVersion: .*/appVersion: ${SHORT_SHA}/" deploy/helm/portfolio/Chart.yaml
+          sed -i.bak "s/^  imageTag: .*/  imageTag: ${SHORT_SHA}/" deploy/helm/portfolio/values.yaml
+          rm deploy/helm/portfolio/Chart.yaml.bak deploy/helm/portfolio/values.yaml.bak
+
+      - name: Commit chart release
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add deploy/helm/portfolio/Chart.yaml deploy/helm/portfolio/values.yaml
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: bump portfolio release to sha-${GITHUB_SHA::7} [skip ci]"
+          git push
