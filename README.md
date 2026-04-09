@@ -1,6 +1,6 @@
 # Portfolio
 
-Personal site built with React + Go, containerized and deployed via GitOps.
+Personal site built with React + Go, containerized and deployed via Argo CD.
 
 **[mrembiasz.pl](https://mrembiasz.pl)**
 
@@ -9,7 +9,8 @@ Personal site built with React + Go, containerized and deployed via GitOps.
 - React SPA (Vite) — frontend
 - Go + Gin — content API backend
 - Nginx Alpine — serves the frontend bundle
-- GitHub Actions → GHCR → ArgoCD ([gitops](https://github.com/kerbatek/gitops))
+- Helm chart in `deploy/helm/portfolio`
+- GitHub Actions → GHCR → Argo CD
 
 See `docs/adr/` for architectural decisions.
 

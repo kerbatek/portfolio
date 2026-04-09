@@ -10,6 +10,7 @@ This directory contains Architecture Decision Records (ADRs) for the portfolio r
 | [ADR-0002](0002-go-api-backend.md) | Go API Backend for Content Serving | Accepted |
 | [ADR-0003](0003-embed-content-in-binary.md) | Embed Markdown Content in the Go Binary | Accepted |
 | [ADR-0004](0004-split-frontend-backend-images.md) | Split Frontend and Backend into Separate Docker Images | Accepted |
+| [ADR-0005](0005-application-chart-owned-by-portfolio-repo.md) | Application Chart Owned by the Portfolio Repository | Accepted |
 
 ## Creating a New ADR
 
