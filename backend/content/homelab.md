@@ -3,7 +3,7 @@ title: "Homelab"
 description: "Single-node Proxmox setup running dual Talos Kubernetes clusters, routed networking, and self-hosted services."
 ---
 
-<p class="section-note" style="text-align: right; font-style: italic;">Last updated: April 5, 2026</p>
+<p class="section-note" style="text-align: right; font-style: italic;">Last updated: April 9, 2026</p>
 
 <p class="section-label">Topology</p>
 
@@ -93,7 +93,7 @@ graph LR
 <p class="spec-title">Platform</p>
 <table class="spec-table">
 <tr><td>ArgoCD</td><td>GitOps continuous delivery</td></tr>
-<tr><td>ArgoCD Image Updater</td><td>Automated container updates</td></tr>
+<tr><td>GitHub Actions</td><td>Branch-coupled image builds and chart updates</td></tr>
 <tr><td>Cilium</td><td>CNI, kube-proxy replacement, BGP control plane, VIP management</td></tr>
 <tr><td>Ingress-NGINX</td><td>Ingress controller (DaemonSet)</td></tr>
 <tr><td>Cert-Manager</td><td>Let's Encrypt TLS automation</td></tr>
@@ -135,6 +135,7 @@ graph LR
 
 <p class="section-label">Next up</p>
 <ul class="plan-list">
+<li>Migrate portfolio backend to .NET and split into microservices</li>
 <li>Migrate Docker Compose services to Kubernetes</li>
 <li>Add centralized log aggregation alongside the existing monitoring stack</li>
 <li>Add another Proxmox node to reduce the single-host failure domain</li>

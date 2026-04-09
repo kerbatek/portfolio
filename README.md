@@ -30,8 +30,19 @@ cd backend && go run .
 cd frontend && npm run dev
 ```
 
+## Local compose
+
+```bash
+docker compose up -d --build
 ```
-# build both images
-docker build -t portfolio-frontend ./frontend
-docker build -t portfolio-backend  ./backend
-```
+
+- App: `http://localhost:8080`
+- Backend API: `http://localhost:8081`
+
+The compose setup is intentionally simple and production-like:
+
+- frontend builds from `frontend/Dockerfile`
+- backend builds from `backend/Dockerfile`
+- compose mounts a local nginx template override so frontend proxies `/api` to the backend container
+
+For source-mounted hot reload, keep using the raw `go run .` and `npm run dev` flow above for now.
