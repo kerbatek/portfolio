@@ -1,0 +1,16 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8081:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend/nginx.compose.conf:/etc/nginx/templates/default.conf.template:ro

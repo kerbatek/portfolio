@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Accepted (deployment promotion mechanism superseded by [ADR-0006](0006-branch-coupled-chart-promotion.md))
 
 ## Context
 
@@ -12,7 +12,7 @@ After the Hugo→React migration (ADR-0001), content was loaded at build time us
 - The frontend and content had a hard coupling that would make future features (full-text search, view counts, RSS feed, related posts) difficult to add without further bundling hacks
 - There was no server-side representation of the content model — all parsing happened in the browser on every page load
 
-The project already runs in Kubernetes and the deployment pipeline (ArgoCD Image Updater) handles rolling out new images automatically. Adding a second service is operationally cheap.
+The project already runs in Kubernetes and the deployment pipeline handles rolling out new images automatically. Adding a second service is operationally cheap.
 
 ## Decision
 

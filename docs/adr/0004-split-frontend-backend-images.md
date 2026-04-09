@@ -33,6 +33,6 @@ The branch-coupled chart promotion flow (ADR-0006) updates the chart tag on the 
 
 - Frontend and backend can be deployed, scaled, and rolled back independently
 - A change to a blog post does not cause a frontend pod restart
-- The Kubernetes manifests (in the gitops repo) require a second Deployment and Service, and the Ingress needs a path-based routing rule
+- The Helm chart and Kubernetes manifests require a second Deployment and Service, and the Ingress needs a path-based routing rule
 - Each push to `main` now builds two images in parallel — CI time is similar to before since they run concurrently
 - The single-image simplicity is lost; operators must know which image to inspect when debugging
