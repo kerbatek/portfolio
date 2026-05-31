@@ -1,5 +1,5 @@
 global:
-  imageTag: sha-db40238
+  imageTag: sha-7f2591d
 
 frontend:
   image:
