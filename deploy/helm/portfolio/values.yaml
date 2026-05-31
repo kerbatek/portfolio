@@ -29,7 +29,8 @@ backend:
       cpu: 100m
       memory: 128Mi
 
-ingress:
-  host: example.invalid
-  ingressClassName: nginx
-  tls: {}
+gateway:
+  host: mrembiasz.pl
+  parentRef:
+    name: public-apps
+    namespace: default
